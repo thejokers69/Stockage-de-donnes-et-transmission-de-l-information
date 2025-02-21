@@ -1,0 +1,4 @@
+# Ignorer les fichiers de captures d'écran
+/assets/*.png
+/assets/*.jpg
+/assets/*.jpeg
