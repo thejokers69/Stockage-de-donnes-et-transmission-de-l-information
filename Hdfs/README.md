@@ -102,9 +102,9 @@ Dans HDFS, l'arborescence doit être organisée comme suit :
     │     ├── Cours
     │     └── TPs
     └── CPP
-          ├── Cours
-          └── TPs
-```
+    ├── Cours
+    └── TPs
+ ```
 
 Les commandes exécutées sont :
 
@@ -114,6 +114,7 @@ hdfs dfs -mkdir -p /BDDC/JAVA/Cours
 hdfs dfs -mkdir -p /BDDC/JAVA/TPs
 hdfs dfs -mkdir -p /BDDC/CPP/Cours
 hdfs dfs -mkdir -p /BDDC/CPP/TPs
+hdfs dfs -mkdir -p /BDDC/Architectures_Stockage_2025
 ```
 
 *Figure : Capture d'écran montrant l'exécution des commandes mkdir et l'arborescence créée.*
@@ -178,6 +179,18 @@ hdfs dfs -cp /BDDC/CPP/Cours/CoursCPP3 /BDDC/JAVA/Cours/
 *Figure : Capture d'écran montrant la suppression et le renommage.*
 
 ![alt text](assets/image-5.png)
+
+### 6.4 Affichage récursif du contenu de HDFS
+
+Pour afficher l'intégralité de l'arborescence sous le répertoire `/BDDC`, utilisez :
+
+```bash
+hdfs dfs -ls -R /BDDC
+```
+
+*Figure : Capture d'écran montrant le contenu complet en mode récursif.*
+
+![alt text](assets/image-9.png)
 
 ---
 
