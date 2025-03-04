@@ -92,3 +92,6 @@ Fichier test.txt copié dans HDFS.
 
 ## Conclusion
 Ce module explore le stockage distribué avec HDFS et Java. TP2, en cours de progression, renforce ces compétences avec des opérations avancées. 🚀
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
