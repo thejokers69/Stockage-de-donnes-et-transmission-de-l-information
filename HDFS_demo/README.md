@@ -19,15 +19,18 @@ Ensure you have the following installed:
 ## 1. Setting up the HDFS Cluster
 
 ### Step 1: Clone the Repository
-```sh
-git clone <repository_url>
-cd <repository_name>
+
+```bash
+git clone https://github.com/thejokers69/Stockage-de-donnes-et-transmission-de-l-information.git
+cd HDFS_demo/HDFSCluster/docker-compose.yaml
 ```
 
 ### Step 2: Start the HDFS Cluster (cd HDFSCuster)
-```sh
+
+```bash
 docker-compose up -d
 ```
+
 This command launches:
 - A **NameNode** (managing file system metadata)
 - Five **DataNodes** (storing file blocks)
@@ -36,9 +39,11 @@ This command launches:
 
 ### Step 3: Verify the Cluster Status
 Check if all services are running:
-```sh
+
+```bash
 docker ps
 ```
+
 Access the HDFS web UI: [http://localhost:9870](http://localhost:9870)
 
 ---
@@ -46,7 +51,7 @@ Access the HDFS web UI: [http://localhost:9870](http://localhost:9870)
 ## 2. Interacting with HDFS
 
 ### Creating Directories and Files
-```sh
+```bash
 # Create a new directory in HDFS
 hdfs dfs -mkdir /user/hadoop
 
@@ -55,17 +60,20 @@ hdfs dfs -touchz /file.txt
 ```
 
 ### Uploading a File
-```sh
+
+```bash
 hdfs dfs -put localfile.txt /file.txt
 ```
 
 ### Listing Files
-```sh
+
+```bash
 hdfs dfs -ls /
 ```
 
 ### Reading a File
-```sh
+
+```bash
 hdfs dfs -cat /file.txt
 ```
 
@@ -75,47 +83,48 @@ hdfs dfs -cat /file.txt
 
 ### Step 1: Compile the Java Code
 Ensure your Hadoop JARs are available in the classpath.
-```sh
+
+```bash
 javac -cp "./jars/*" -d . src/org/example/tpHDFS/App1.java
 javac -cp "./jars/*" -d . src/org/example/tpHDFS/AppWriter.java
 ```
 
 ### Step 2: Run the Writer Application
 This will create a new file (`file2.txt`) in HDFS and write data into it.
-```sh
-java -cp "./jars/*:." org.example.tpHDFS.AppWriter
+```bash
+java -cp "./jars/*:." org.mundiapolis.tpHDFS.AppWriter
 ```
 Verify the file content:
-```sh
+```bash
 hdfs dfs -cat /file2.txt
 ```
 
 ### Step 3: Run the Reader Application
 This will read and print the content of `/file.txt`.
-```sh
-java -cp "./jars/*:." org.example.tpHDFS.App1
+```bash
+java -cp "./jars/*:." org.mundiapolis.tpHDFS.App1
 ```
 
 ---
 
 ## 4. Stopping the Cluster
-```sh
+```bash
 docker-compose down
 ```
 
 ---
 
-## 5. Troubleshooting
+## 5. Troublebashooting
 - **Check Hadoop Logs**
-  ```sh
+  ```bash
   docker logs namenode
   ```
 - **Check Running Containers**
-  ```sh
+  ```bash
 docker ps
   ```
 - **Restart a Container**
-  ```sh
+  ```bash
 docker restart namenode
   ```
 
