@@ -1,138 +1,119 @@
-# HDFS Demo with Java Applications
+# TP2 : Manipulation de HDFS avec une Application Java
 
-This repository demonstrates how to interact with Hadoop Distributed File System (HDFS) using Java applications. The project includes:
-- **App1**: Reads a file from HDFS
-- **AppWriter**: Writes data to a file in HDFS
-- **Docker-Compose Setup**: Deploys an HDFS cluster with a NameNode and multiple DataNodes
+⚠️ **Statut : En progression** ⚠️
 
----
+## Introduction
 
-## Prerequisites
-Ensure you have the following installed:
-- Docker & Docker-Compose
-- Java Development Kit (JDK) 8+
-- Apache Hadoop JARs (included in `./jars` directory)
-- Git (optional, for cloning this repository)
+Ce projet fait partie d’un TP sur la manipulation de HDFS avec Java, utilisant Hadoop 3.3.6 et Maven, dans un environnement Docker.
 
----
+## Objectifs
 
-## 1. Setting up the HDFS Cluster
+Les objectifs du TP2 sont les suivants :
+- Créer un répertoire /user/hadoop/appData dans HDFS s’il n’existe pas.
+- Lister tous les fichiers et répertoires dans /user/hadoop/appData.
+- Créer un fichier data.txt dans /user/hadoop/appData et y écrire "Bienvenue sur HDFS avec Java".
+- Lire et afficher le contenu de /user/hadoop/appData/data.txt.
+- Copier un fichier local test.txt dans HDFS sous /user/hadoop/appData/test.txt.
+- Télécharger le fichier /user/hadoop/appData/test.txt depuis HDFS vers le système local.
+- Renommer le fichier /user/hadoop/appData/data.txt en /user/hadoop/appData/data_v1.txt.
+- Supprimer le fichier /user/hadoop/appData/data_v1.txt.
+- Récupérer et afficher les métadonnées du fichier /user/hadoop/appData/test.txt.
+- Vérifier l’espace disponible dans HDFS.
+- Déplacer le fichier /user/hadoop/appData/test.txt dans /user/hadoop/archive/.
+- Écrire un fichier CSV products.csv avec une liste de produits (ID, Nom, Prix).
+- Lire et afficher le contenu de products.csv ligne par ligne.
 
-### Step 1: Clone the Repository
+## Prérequis
 
-```bash
-git clone https://github.com/thejokers69/Stockage-de-donnes-et-transmission-de-l-information.git
-cd HDFS_demo/HDFSCluster/docker-compose.yaml
+Assurez-vous d'avoir les outils suivants installés :
+- Docker
+- Java JDK 8+
+- Maven
+- IntelliJ IDEA (recommandé)
+
+## Structure du projet
+
+Le projet est structuré comme suit :
+```
+HDFS_demo/
+├── pom.xml
+├── src/
+│   └── main/
+│       └── java/
+│           └── ma/
+│               └── mundiapolis/
+│                   └── tphdfs/
+│                       └── App2.java
+└── HDFSCluster/
+    ├── config
+    └── docker-compose.yaml
 ```
 
-### Step 2: Start the HDFS Cluster (cd HDFSCuster)
+## Installation et configuration
+
+### Étape 1 : Démarrer le cluster Hadoop avec Docker
 
 ```bash
 docker-compose up -d
 ```
 
-This command launches:
-- A **NameNode** (managing file system metadata)
-- Five **DataNodes** (storing file blocks)
-- A **ResourceManager** (for YARN jobs)
-- A **NodeManager** (for managing containerized applications)
+### Étape 2 : Vérifier via l’interface web
 
-### Step 3: Verify the Cluster Status
-Check if all services are running:
+Accédez à l'interface web de HDFS à l'adresse : [http://localhost:9870](http://localhost:9870)
+
+### Étape 3 : Commandes Maven pour compiler et exécuter
 
 ```bash
-docker ps
+mvn clean package
+java -jar target/HDFS-1.0-SNAPSHOT.jar
 ```
 
-Access the HDFS web UI: [http://localhost:9870](http://localhost:9870)
+## Utilisation
 
----
+Pour exécuter le programme, suivez les étapes ci-dessous :
+1. Démarrez le cluster Hadoop avec Docker.
+2. Compilez et exécutez le programme avec Maven.
+3. Suivez les instructions affichées dans la console pour chaque opération.
 
-## 2. Interacting with HDFS
+## Exemple de sortie
 
-### Creating Directories and Files
-```bash
-# Create a new directory in HDFS
-hdfs dfs -mkdir /user/hadoop
+Voici un extrait de la sortie console attendue :
 
-# Create an empty file
-hdfs dfs -touchz /file.txt
+```
+Répertoire /user/hadoop/appData créé.
+Liste des fichiers/répertoires dans /user/hadoop/appData :
+data.txt - Fichier
+test.txt - Fichier
+Contenu de /user/hadoop/appData/data.txt :
+Bienvenue sur HDFS avec Java.
+Fichier test.txt copié dans HDFS.
+Fichier test.txt téléchargé depuis HDFS.
+Fichier data.txt renommé en data_v1.txt.
+Fichier data_v1.txt supprimé.
+Métadonnées de /user/hadoop/appData/test.txt :
+Taille : 14 octets
+Propriétaire : hadoop
+Groupe : supergroup
+Permissions : rw-r--r--
+Date de modification : 1633024800000
+Espace HDFS :
+Capacité totale : 5000000000 octets
+Espace utilisé : 1000000000 octets
+Espace restant : 4000000000 octets
+Fichier test.txt déplacé vers /user/hadoop/archive/.
+Fichier products.csv créé dans HDFS.
+Contenu de /user/hadoop/appData/products.csv :
+ID,Nom,Prix
+1,Laptop,999.99
+2,Smartphone,499.99
+3,Tablette,299.99
+Opérations terminées.
 ```
 
-### Uploading a File
+## Problèmes connus
 
-```bash
-hdfs dfs -put localfile.txt /file.txt
-```
+Le fichier local `test.txt` doit exister pour éviter une erreur `FileNotFoundException`.
 
-### Listing Files
+## Conclusion
 
-```bash
-hdfs dfs -ls /
-```
-
-### Reading a File
-
-```bash
-hdfs dfs -cat /file.txt
-```
-
----
-
-## 3. Running the Java Applications
-
-### Step 1: Compile the Java Code
-Ensure your Hadoop JARs are available in the classpath.
-
-```bash
-javac -cp "./jars/*" -d . src/org/example/tpHDFS/App1.java
-javac -cp "./jars/*" -d . src/org/example/tpHDFS/AppWriter.java
-```
-
-### Step 2: Run the Writer Application
-This will create a new file (`file2.txt`) in HDFS and write data into it.
-```bash
-java -cp "./jars/*:." org.mundiapolis.tpHDFS.AppWriter
-```
-Verify the file content:
-```bash
-hdfs dfs -cat /file2.txt
-```
-
-### Step 3: Run the Reader Application
-This will read and print the content of `/file.txt`.
-```bash
-java -cp "./jars/*:." org.mundiapolis.tpHDFS.App1
-```
-
----
-
-## 4. Stopping the Cluster
-```bash
-docker-compose down
-```
-
----
-
-## 5. Troublebashooting
-- **Check Hadoop Logs**
-  ```bash
-  docker logs namenode
-  ```
-- **Check Running Containers**
-  ```bash
-docker ps
-  ```
-- **Restart a Container**
-  ```bash
-docker restart namenode
-  ```
-
----
-
-## Resources
-- [Hadoop Official Documentation](https://hadoop.apache.org/docs/)
-- [HDFS Commands](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html)
-
-Enjoy experimenting with HDFS! 🚀
-
+Ce TP2 est utile pour apprendre à manipuler HDFS avec Java, en utilisant un environnement Docker et des outils comme Maven et IntelliJ IDEA. Il couvre une variété d'opérations HDFS essentielles pour comprendre le fonctionnement des systèmes de fichiers distribués.
