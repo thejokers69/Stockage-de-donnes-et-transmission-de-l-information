@@ -75,40 +75,6 @@ Pour exécuter le programme, suivez les étapes ci-dessous :
 2. Compilez et exécutez le programme avec Maven.
 3. Suivez les instructions affichées dans la console pour chaque opération.
 
-## Exemple de sortie
-
-Voici un extrait de la sortie console attendue :
-
-```
-Répertoire /user/hadoop/appData créé.
-Liste des fichiers/répertoires dans /user/hadoop/appData :
-data.txt - Fichier
-test.txt - Fichier
-Contenu de /user/hadoop/appData/data.txt :
-Bienvenue sur HDFS avec Java.
-Fichier test.txt copié dans HDFS.
-Fichier test.txt téléchargé depuis HDFS.
-Fichier data.txt renommé en data_v1.txt.
-Fichier data_v1.txt supprimé.
-Métadonnées de /user/hadoop/appData/test.txt :
-Taille : 14 octets
-Propriétaire : hadoop
-Groupe : supergroup
-Permissions : rw-r--r--
-Date de modification : 1633024800000
-Espace HDFS :
-Capacité totale : 5000000000 octets
-Espace utilisé : 1000000000 octets
-Espace restant : 4000000000 octets
-Fichier test.txt déplacé vers /user/hadoop/archive/.
-Fichier products.csv créé dans HDFS.
-Contenu de /user/hadoop/appData/products.csv :
-ID,Nom,Prix
-1,Laptop,999.99
-2,Smartphone,499.99
-3,Tablette,299.99
-Opérations terminées.
-```
 
 ## Problèmes connus
 
