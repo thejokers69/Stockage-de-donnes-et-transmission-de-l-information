@@ -75,6 +75,74 @@ java -cp target/HDFS-1.0-SNAPSHOT.jar ma.mundiapolis.tpHDFS.App2
 ```
 Cela lance `App2.java`, qui exécute toutes les tâches de TP2.
 
+## Commandes pour chaque question de TP2
+
+### 1. Créer un répertoire /user/hadoop/appData dans HDFS s’il n’existe pas
+```bash
+hdfs dfs -mkdir -p /user/hadoop/appData
+```
+
+### 2. Lister tous les fichiers et répertoires dans /user/hadoop/appData
+```bash
+hdfs dfs -ls /user/hadoop/appData
+```
+
+### 3. Créer un fichier data.txt dans /user/hadoop/appData et y écrire "Bienvenue sur HDFS avec Java"
+```bash
+echo "Bienvenue sur HDFS avec Java" | hdfs dfs -put - /user/hadoop/appData/data.txt
+```
+
+### 4. Lire et afficher le contenu de /user/hadoop/appData/data.txt
+```bash
+hdfs dfs -cat /user/hadoop/appData/data.txt
+```
+
+### 5. Copier un fichier local test.txt dans HDFS sous /user/hadoop/appData/test.txt
+```bash
+hdfs dfs -put test.txt /user/hadoop/appData/test.txt
+```
+
+### 6. Télécharger le fichier /user/hadoop/appData/test.txt depuis HDFS vers le système local
+```bash
+hdfs dfs -get /user/hadoop/appData/test.txt test_downloaded.txt
+```
+
+### 7. Renommer le fichier /user/hadoop/appData/data.txt en /user/hadoop/appData/data_v1.txt
+```bash
+hdfs dfs -mv /user/hadoop/appData/data.txt /user/hadoop/appData/data_v1.txt
+```
+
+### 8. Supprimer le fichier /user/hadoop/appData/data_v1.txt
+```bash
+hdfs dfs -rm /user/hadoop/appData/data_v1.txt
+```
+
+### 9. Récupérer et afficher les métadonnées du fichier /user/hadoop/appData/test.txt
+```bash
+hdfs dfs -stat /user/hadoop/appData/test.txt
+```
+
+### 10. Vérifier l’espace disponible dans HDFS
+```bash
+hdfs dfsadmin -report
+```
+
+### 11. Déplacer le fichier /user/hadoop/appData/test.txt dans /user/hadoop/archive/
+```bash
+hdfs dfs -mkdir -p /user/hadoop/archive
+hdfs dfs -mv /user/hadoop/appData/test.txt /user/hadoop/archive/test.txt
+```
+
+### 12. Écrire un fichier CSV products.csv avec une liste de produits (ID, Nom, Prix)
+```bash
+echo "ID,Nom,Prix\n1,Laptop,999.99\n2,Smartphone,499.99\n3,Tablette,299.99" | hdfs dfs -put - /user/hadoop/appData/products.csv
+```
+
+### 13. Lire et afficher le contenu de products.csv ligne par ligne
+```bash
+hdfs dfs -cat /user/hadoop/appData/products.csv
+```
+
 ## Exemple de sortie
 ```
 Répertoire /user/hadoop/appData créé.
