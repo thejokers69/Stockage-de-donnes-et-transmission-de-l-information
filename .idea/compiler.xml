@@ -14,6 +14,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="HDFS" />
         <module name="TP-Crytpographie" />
+        <module name="TP4-Blockchain-avec-Java" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
