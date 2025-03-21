@@ -8,11 +8,19 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<BlockChain> blockChains =  new ArrayList<>();
-        blockChains.add(new BlockChain(0,"block 1", "0" ));
-        blockChains.add(new BlockChain(1,"block 2", blockChains.get(0).getCurrentHash() ));
-        blockChains.add(new BlockChain(2,"block 3", blockChains.get(1).getCurrentHash() ));
-        blockChains.add(new BlockChain(3,"block 4", blockChains.get(2).getCurrentHash() ));
-        blockChains.add(new BlockChain(4,"block 5", blockChains.get(3).getCurrentHash() ));
+        List<Transaction> transactions1= new ArrayList<>();
+        transactions1.add(new Transaction("Account1", "Account2", 100));// transaction 1
+        transactions1.add(new Transaction("Account2", "Account1", 50));// transaction 2
+        blockChains.add(new BlockChain(0,transactions1, "0" ));
+        List<Transaction> transactions2= new ArrayList<>();
+
+        transactions2.add(new Transaction("Account3", "Account4", 100));// transaction 1
+        transactions2.add(new Transaction("Account4", "Account3", 50));// transaction 2
+
+        blockChains.add(new BlockChain(1,transactions2, blockChains.get(0).getCurrentHash() ));
+//        blockChains.add(new BlockChain(2,"block 3", blockChains.get(1).getCurrentHash() ));
+//        blockChains.add(new BlockChain(3,"block 4", blockChains.get(2).getCurrentHash() ));
+//        blockChains.add(new BlockChain(4,"block 5", blockChains.get(3).getCurrentHash() ));
 
         blockChains.forEach(System.out::println);
 
