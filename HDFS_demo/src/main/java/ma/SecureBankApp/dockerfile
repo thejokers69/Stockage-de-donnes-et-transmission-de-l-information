@@ -1,0 +1,15 @@
+FROM openjdk:11-jre-slim
+
+WORKDIR /app
+
+# Copy Java source files
+COPY ClientAES.java .
+COPY ServeurAES.java .
+COPY RSAProtection.java .
+COPY HMACSignature.java .
+
+# Compile Java files
+RUN javac *.java
+
+# Run one of the programs (modify as needed)
+CMD ["java", "ClientAES"]
