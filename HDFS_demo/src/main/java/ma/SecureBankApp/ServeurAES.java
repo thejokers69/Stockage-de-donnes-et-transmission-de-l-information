@@ -2,6 +2,7 @@ package ma.SecureBankApp;
 
         import javax.crypto.Cipher;
         import javax.crypto.spec.SecretKeySpec;
+        import java.nio.charset.StandardCharsets;
         import java.util.Base64;
 
         public class ServeurAES {
@@ -19,7 +20,7 @@ package ma.SecureBankApp;
                 cipher.init(Cipher.DECRYPT_MODE, aesKey);
 
                 byte[] decrypted = cipher.doFinal(encryptedBytes);
-                String decryptedMessage = new String(decrypted, "UTF-8");
+                String decryptedMessage = new String(decrypted, StandardCharsets.UTF_8);
                 System.out.println("Message déchiffré: " + decryptedMessage);
             }
         }
